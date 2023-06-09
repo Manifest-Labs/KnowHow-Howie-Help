@@ -25,7 +25,7 @@ export default function Home() {
   }>({
     messages: [
       {
-        message: 'Hi, what would you like to learn about this document?',
+        message: 'Howdy! How can I help?',
         type: 'apiMessage',
       },
     ],
@@ -125,7 +125,7 @@ export default function Home() {
       <Layout>
         <div className="mx-auto flex flex-col gap-4">
           <h1 className="text-2xl font-bold leading-[1.1] tracking-tighter text-center">
-            Chat With Your Docs
+            KnowHow's Industry Expert
           </h1>
           <main className={styles.main}>
             <div className={styles.cloud}>
@@ -223,8 +223,8 @@ export default function Home() {
                     name="userInput"
                     placeholder={
                       loading
-                        ? 'Waiting for response...'
-                        : 'What is this legal case about?'
+                        ? 'Generating a response (sometimes it takes a while 😬)..'
+                        : 'Give an outline for a blog post on...'
                     }
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
