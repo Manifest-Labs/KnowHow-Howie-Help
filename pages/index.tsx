@@ -125,7 +125,7 @@ export default function Home() {
       <Layout>
         <div className="mx-auto flex flex-col gap-4">
           <h1 className="text-2xl font-bold leading-[1.1] tracking-tighter text-center">
-            KnowHow's Industry Expert
+            The KnowHow Know-It-All
           </h1>
           <main className={styles.main}>
             <div className={styles.cloud}>
@@ -137,7 +137,7 @@ export default function Home() {
                     icon = (
                       <Image
                         key={index}
-                        src="/bot-image.png"
+                        src="/howie.png"
                         alt="AI"
                         width="40"
                         height="40"
@@ -150,7 +150,7 @@ export default function Home() {
                     icon = (
                       <Image
                         key={index}
-                        src="/usericon.png"
+                        src="/knowteam.png"
                         alt="Me"
                         width="30"
                         height="30"
