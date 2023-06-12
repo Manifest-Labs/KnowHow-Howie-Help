@@ -133,7 +133,7 @@ export default function Home() {
       <Layout>
         <div className="mx-auto flex flex-col gap-4" >
           <h1 className={`${styles.openSans} text-2xl font-bold leading-[1.1] tracking-tighter text-center pt-6`}>
-            The KnowHow Marketer's Best Friend
+            The KnowHow Marketer&apos;s Best Friend
           </h1>
           <main className={styles.main}>
             <div className={styles.cloud}>
