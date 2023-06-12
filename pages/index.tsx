@@ -44,6 +44,11 @@ export default function Home() {
     }
   }, [messages]);
 
+    // Focus on text field on load
+    useEffect(() => {
+      textAreaRef.current?.focus();
+    }, []);
+
   //handle form submission
   async function handleSubmit(e: any) {
     e.preventDefault();
