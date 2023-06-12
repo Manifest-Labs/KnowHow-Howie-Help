@@ -38,8 +38,11 @@ export default function Home() {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    textAreaRef.current?.focus();
-  }, []);
+    const messageList = messageListRef.current;
+    if (messageList) {
+      messageList.scrollTop = messageList.scrollHeight;
+    }
+  }, [messages]);
 
   //handle form submission
   async function handleSubmit(e: any) {
@@ -124,7 +127,7 @@ export default function Home() {
     <>
       <Layout>
         <div className="mx-auto flex flex-col gap-4" >
-          <h1 className="text-2xl font-bold leading-[1.1] tracking-tighter text-center pt-6">
+          <h1 className={`${styles.openSans} text-2xl font-bold leading-[1.1] tracking-tighter text-center pt-6`}>
             The KnowHow Marketer's Best Friend
           </h1>
           <main className={styles.main}>

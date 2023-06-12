@@ -6,13 +6,13 @@
   padding: 1rem;
 }
 
-.header {
-  width: auto;
+.openSans {
+  font-family: 'Open Sans';
+  font-weight: 600;
+  color: #2b2b30;
+
 }
 
-.header p {
-  text-align: center;
-}
 
 .cloudform {
   position: relative;
