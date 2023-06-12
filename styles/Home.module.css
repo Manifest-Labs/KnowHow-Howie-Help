@@ -27,7 +27,7 @@
   border-radius: 0.5rem;
   border: 1px solid #d9d9e3;
   background: #ffffff;
-  color: #000;
+  color: #2b2b30;
   outline: none;
 }
 
@@ -102,7 +102,7 @@
 
 .usermessagewaiting {
   padding: 1.5rem;
-  color: #000;
+  color: #2b2b30;
   background: linear-gradient(to left, #07080938, #1a1c2024, #07080936);
   background-size: 200% 200%;
   background-position: -100% 0;
@@ -123,7 +123,7 @@
 .apimessage {
   background: #f9fafb;
   padding: 1.5rem;
-  color: #000;
+  color: #2b2b30;
   animation: fadein 0.5s;
 }
 
