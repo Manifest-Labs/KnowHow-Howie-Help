@@ -121,12 +121,20 @@ export default function Home() {
 
   //prevent empty submissions
   const handleEnter = (e: any) => {
-    if (e.key === 'Enter' && query) {
+    if (e.key === 'Enter' && e.shiftKey) {
+      // If the user presses Shift+Enter, we let the event continue,
+      // which will insert a newline character into the textarea
+      return;
+    } else if (e.key === 'Enter' && query) {
+      // If the user presses Enter (without Shift), we submit the form
+      e.preventDefault();
       handleSubmit(e);
-    } else if (e.key == 'Enter') {
+    } else if (e.key === 'Enter') {
+      // If the user presses Enter with an empty query, we prevent the form submission
       e.preventDefault();
     }
   };
+  
 
   return (
     <>
@@ -226,7 +234,7 @@ export default function Home() {
                     ref={textAreaRef}
                     autoFocus={false}
                     rows={1}
-                    maxLength={512}
+                    maxLength={32000}
                     id="userInput"
                     name="userInput"
                     placeholder={

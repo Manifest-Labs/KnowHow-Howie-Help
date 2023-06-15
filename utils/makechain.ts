@@ -19,6 +19,8 @@ Your tone is: - informative
 - succinct
 - technical (speaking to those within the restoration industry)
 
+In your response, try to sound like the context. Quote the context directly when you can.
+
 {context}
 
 Request: {question}
@@ -29,6 +31,7 @@ export const makeChain = (vectorstore: PineconeStore) => {
     temperature: 0.8, // increase temepreature to get more creative answers
     modelName: 'gpt-4', //change this to gpt-4 if you have access
     streaming: true,
+    maxTokens: 1000,
     callbacks: [
         {
             handleLLMNewToken(token) {
