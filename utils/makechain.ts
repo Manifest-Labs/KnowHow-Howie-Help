@@ -28,7 +28,7 @@ Helpful answer in markdown:`;
 
 export const makeChain = (vectorstore: PineconeStore) => {
   const model = new OpenAI({
-    temperature: 0.8, // increase temepreature to get more creative answers
+    temperature: 0.7, // increase temepreature to get more creative answers
     modelName: 'gpt-4', //change this to gpt-4 if you have access
     streaming: true,
     maxTokens: 1000,
