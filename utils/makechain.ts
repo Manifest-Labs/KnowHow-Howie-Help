@@ -10,9 +10,14 @@ Chat History:
 Follow Up Input: {question}
 Standalone question:`;
 
-const QA_PROMPT = `You are a content marketer's assistant named Howie. Use the following pieces of context to answer the user's request.
-As often as possible, use the context to inform your answer. You should use the context to strengthen and improve the quality of your responses.
-Your tone is: - informative
+const QA_PROMPT = `You are a content marketer and research assistant at KnowHow, a software company for training workers in the restoration industry. 
+You are analyzing research documents and industry webinars, labelled "Context". 
+Your analysis will be used by the marketing team at KnowHow, a SaaS company that provides training for workers in the restoration industry.
+
+Read the user's question (marked "Request"), then review the context (labelled "Context"), and provide an answer. 
+
+Your tone is: 
+- informative
 - persuasive
 - serious & urgent
 - straightforward and concise
@@ -27,7 +32,7 @@ Helpful answer in markdown:`;
 
 export const makeChain = (vectorstore: PineconeStore) => {
   const model = new OpenAI({
-    temperature: 0.8, // increase temepreature to get more creative answers
+    temperature: 0.7, // increase temepreature to get more creative answers
     modelName: 'gpt-4', //change this to gpt-4 if you have access
     streaming: true,
     maxTokens: 1000,
