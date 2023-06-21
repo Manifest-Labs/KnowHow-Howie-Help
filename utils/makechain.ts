@@ -10,7 +10,14 @@ Chat History:
 Follow Up Input: {question}
 Standalone question:`;
 
-const QA_PROMPT = `You are a research assistant, and your job is to answer the user's question based on the following context. As much as possible, only use language from the context when answering the question. Directly quote the context whenever possible.
+const QA_PROMPT = `You are a content marketer's assistant named Howie. Use the following pieces of context to answer the user's request.
+As often as possible, use the context to inform your answer. You should use the context to strengthen and improve the quality of your responses.
+Your tone is: - informative
+- persuasive
+- serious & urgent
+- straightforward and concise
+- succinct
+- technical (speaking to those within the restoration industry)
 
 Context:
 {context}
@@ -20,7 +27,7 @@ Helpful answer in markdown:`;
 
 export const makeChain = (vectorstore: PineconeStore) => {
   const model = new OpenAI({
-    temperature: 0.3, // increase temepreature to get more creative answers
+    temperature: 0.8, // increase temepreature to get more creative answers
     modelName: 'gpt-4', //change this to gpt-4 if you have access
     streaming: true,
     maxTokens: 1000,
