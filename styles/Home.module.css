@@ -3,16 +3,37 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 0rem 1rem 1rem 1rem;
+}
+
+.mainContainer {
+  display: flex;
+  justify-content: space-between; /* Aligns items on the horizontal line */
+  align-items: flex-start; /* Aligns items on the vertical line */
+}
+
+.modeContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #d9d9e3;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 0.5rem;
 }
 
 .openSans {
   font-family: 'Open Sans';
   font-weight: 600;
   color: #2b2b30;
-
 }
 
+.radioButton {
+  margin-right: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-family: 'Open Sans';
+  font-weight: 500;
+  color: #2b2b30;
+}
 
 .cloudform {
   position: relative;

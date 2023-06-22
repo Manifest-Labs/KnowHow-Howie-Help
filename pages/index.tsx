@@ -145,162 +145,165 @@ export default function Home() {
           <h1 className={`${styles.openSans} text-2xl font-bold leading-[1.1] tracking-tighter text-center pt-6`}>
             Let Howie Help!
           </h1>
-          <main className={styles.main}>
-            <div className={styles.cloud}>
-              <div ref={messageListRef} className={styles.messagelist}>
-                {messages.map((message, index) => {
-                  let icon;
-                  let className;
-                  if (message.type === 'apiMessage') {
-                    icon = (
-                      <Image
-                        key={index}
-                        src="/howie.png"
-                        alt="AI"
-                        width="40"
-                        height="40"
-                        className={styles.boticon}
-                        priority
-                      />
-                    );
-                    className = styles.apimessage;
-                  } else {
-                    icon = (
-                      <Image
-                        key={index}
-                        src="/knowteam.png"
-                        alt="Me"
-                        width="30"
-                        height="30"
-                        className={styles.usericon}
-                        priority
-                      />
-                    );
-                    // The latest message sent by the user will be animated while waiting for a response
-                    className =
-                      loading && index === messages.length - 1
-                        ? styles.usermessagewaiting
-                        : styles.usermessage;
-                  }
-                  return (
-                    <>
-                      <div key={`chatMessage-${index}`} className={className}>
-                        {icon}
-                        <div className={styles.markdownanswer}>
-                          <ReactMarkdown linkTarget="_blank">
-                            {message.message}
-                          </ReactMarkdown>
-                        </div>
-                      </div>
-                      {message.sourceDocs && (
-                        <div
-                          className="p-5"
-                          key={`sourceDocsAccordion-${index}`}
-                        >
-                          <Accordion
-                            type="single"
-                            collapsible
-                            className="flex-col"
-                          >
-                            {message.sourceDocs.map((doc, index) => (
-                              <div key={`messageSourceDocs-${index}`}>
-                                <AccordionItem value={`item-${index}`}>
-                                  <AccordionTrigger>
-                                    <h3>Source {index + 1}</h3>
-                                  </AccordionTrigger>
-                                  <AccordionContent>
-                                    <ReactMarkdown linkTarget="_blank">
-                                      {doc.pageContent}
-                                    </ReactMarkdown>
-                                    <p className="mt-2">
-                                      <b>Source:</b> {doc.metadata.source}
-                                    </p>
-                                  </AccordionContent>
-                                </AccordionItem>
-                              </div>
-                            ))}
-                          </Accordion>
-                        </div>
-                      )}
-                    </>
-                  );
-                })}
-              </div>
-            </div>
-            <div className={styles.center}>
-              <div className={styles.cloudform}>
-                <form onSubmit={handleSubmit}>
-                  <textarea
-                    disabled={loading}
-                    onKeyDown={handleEnter}
-                    ref={textAreaRef}
-                    autoFocus={false}
-                    rows={1}
-                    maxLength={32000}
-                    id="userInput"
-                    name="userInput"
-                    placeholder={
-                      loading
-                        ? 'Generating a response (sometimes it takes a while 😬)..'
-                        : 'Give an outline for a blog post on...'
+          <div className={styles.mainContainer}>
+            <main className={styles.main}>
+              <div className={styles.cloud}>
+                <div ref={messageListRef} className={styles.messagelist}>
+                  {messages.map((message, index) => {
+                    let icon;
+                    let className;
+                    if (message.type === 'apiMessage') {
+                      icon = (
+                        <Image
+                          key={index}
+                          src="/howie.png"
+                          alt="AI"
+                          width="40"
+                          height="40"
+                          className={styles.boticon}
+                          priority
+                        />
+                      );
+                      className = styles.apimessage;
+                    } else {
+                      icon = (
+                        <Image
+                          key={index}
+                          src="/knowteam.png"
+                          alt="Me"
+                          width="30"
+                          height="30"
+                          className={styles.usericon}
+                          priority
+                        />
+                      );
+                      // The latest message sent by the user will be animated while waiting for a response
+                      className =
+                        loading && index === messages.length - 1
+                          ? styles.usermessagewaiting
+                          : styles.usermessage;
                     }
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    className={styles.textarea}
-                  />
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className={styles.generatebutton}
-                  >
-                    {loading ? (
-                      <div className={styles.loadingwheel}>
-                        <LoadingDots color="#000" />
+                    return (
+                      <>
+                        <div key={`chatMessage-${index}`} className={className}>
+                          {icon}
+                          <div className={styles.markdownanswer}>
+                            <ReactMarkdown linkTarget="_blank">
+                              {message.message}
+                            </ReactMarkdown>
+                          </div>
+                        </div>
+                        {message.sourceDocs && (
+                          <div
+                            className="p-5"
+                            key={`sourceDocsAccordion-${index}`}
+                          >
+                            <Accordion
+                              type="single"
+                              collapsible
+                              className="flex-col"
+                            >
+                              {message.sourceDocs.map((doc, index) => (
+                                <div key={`messageSourceDocs-${index}`}>
+                                  <AccordionItem value={`item-${index}`}>
+                                    <AccordionTrigger>
+                                      <h3>Source {index + 1}</h3>
+                                    </AccordionTrigger>
+                                    <AccordionContent>
+                                      <ReactMarkdown linkTarget="_blank">
+                                        {doc.pageContent}
+                                      </ReactMarkdown>
+                                      <p className="mt-2">
+                                        <b>Source:</b> {doc.metadata.source}
+                                      </p>
+                                    </AccordionContent>
+                                  </AccordionItem>
+                                </div>
+                              ))}
+                            </Accordion>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className={styles.center}>
+                <div className={styles.cloudform}>
+                  <form onSubmit={handleSubmit}>
+                    <textarea
+                      disabled={loading}
+                      onKeyDown={handleEnter}
+                      ref={textAreaRef}
+                      autoFocus={false}
+                      rows={1}
+                      maxLength={32000}
+                      id="userInput"
+                      name="userInput"
+                      placeholder={
+                        loading
+                          ? 'Generating a response (sometimes it takes a while 😬)..'
+                          : 'Give an outline for a blog post on...'
+                      }
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      className={styles.textarea}
+                    />
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className={styles.generatebutton}
+                    >
+                      {loading ? (
+                        <div className={styles.loadingwheel}>
+                          <LoadingDots color="#000" />
+                        </div>
+                      ) : (
+                        // Send icon SVG in input field
+                        <svg
+                          viewBox="0 0 20 20"
+                          className={styles.svgicon}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                        </svg>
+                      )}
+                    </button>
+                  </form>
+                </div>
+              </div>
+              {error && (
+                <div className="border border-red-400 rounded-md p-4">
+                  <p className="text-red-500">{error}</p>
+                </div>
+              )}
+            </main>
+            <div className={styles.modeContainer}>
+                      <div className={styles.radioButton}>
+                        <h2 className={`${styles.openSans} font-semibold text-center text-l pb-2`}>Mode:</h2>
+                        <input 
+                          type="radio"
+                          id="research-mode"
+                          name="mode"
+                          value="research"
+                          checked={mode === 'research'}
+                          onChange={(e) => setMode(e.target.value)}
+                        />
+                        <label htmlFor="research-mode">🧑🏻‍🔬 Research</label>
                       </div>
-                    ) : (
-                      // Send icon SVG in input field
-                      <svg
-                        viewBox="0 0 20 20"
-                        className={styles.svgicon}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                      </svg>
-                    )}
-                  </button>
-                  <div className="flex items-center space-x-4">
-                    <div>
-                      <input 
-                        type="radio"
-                        id="research-mode"
-                        name="mode"
-                        value="research"
-                        checked={mode === 'research'}
-                        onChange={(e) => setMode(e.target.value)}
-                      />
-                      <label htmlFor="research-mode">Research Mode</label>
+                      <div className={styles.radioButton}>
+                        <input 
+                          type="radio"
+                          id="creative-mode"
+                          name="mode"
+                          value="creative"
+                          checked={mode === 'creative'}
+                          onChange={(e) => setMode(e.target.value)}
+                        />
+                        <label htmlFor="creative-mode">🧑🏻‍🎨 Creative</label>
+                      </div>
                     </div>
-                    <div>
-                      <input 
-                        type="radio"
-                        id="creative-mode"
-                        name="mode"
-                        value="creative"
-                        checked={mode === 'creative'}
-                        onChange={(e) => setMode(e.target.value)}
-                      />
-                      <label htmlFor="creative-mode">Creative Mode</label>
-                    </div>
-                  </div>
-                </form>
-              </div>
             </div>
-            {error && (
-              <div className="border border-red-400 rounded-md p-4">
-                <p className="text-red-500">{error}</p>
-              </div>
-            )}
-          </main>
         </div>
         <footer className="m-auto p-4">
           <a href="https://tryknowhow.com">

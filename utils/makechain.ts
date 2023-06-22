@@ -51,7 +51,7 @@ Helpful answer in markdown:`;
 export const makeChain = (vectorstore: PineconeStore, mode: string) => {
   let QA_PROMPT = mode === 'research' ? QA_PROMPT_RESEARCH : QA_PROMPT_CREATIVE;
 
-  const temperature = mode === 'research' ? 0.3 : 0.8;
+  const temperature = mode === 'research' ? 0.2 : 0.8;
 
   const model = new OpenAI({
     temperature: temperature, // increase temepreature to get more creative answers
