@@ -22,12 +22,10 @@ export default async function handler(
   if (!question) {
     return res.status(400).json({ message: 'No question in the request' });
   }
-  
-  // Validate mode
+
   if (!mode || !['research', 'creative'].includes(mode)) {
     return res.status(400).json({ message: 'Invalid or missing mode in the request' });
   }
-
   // OpenAI recommends replacing newlines with spaces for best results
   const sanitizedQuestion = question.trim().replaceAll('\n', ' ');
 

@@ -10,11 +10,11 @@ Chat History:
 Follow Up Input: {question}
 Standalone question:`;
 
-const QA_PROMPT_RESEARCH = `You are a content marketer and research assistant at KnowHow, a software company for training workers in the restoration industry. 
+const QA_PROMPT_RESEARCH = `You are a research assistant at KnowHow, a software company for training workers in the restoration industry. 
 You are analyzing research documents and industry webinars, labelled "Context". 
-Your analysis will be used by the marketing team at KnowHow, a SaaS company that provides training for workers in the restoration industry.
+Your job is to read the context, and then answer the user's question (labeled "Request"). Your response will be used by the marketing team at KnowHow, a SaaS company that provides training for workers in the restoration industry.
 
-Read the user's question (marked "Request"), then review the context (labelled "Context"), and provide an answer. 
+Please directly quote the context in your response if you can. If you cannot, please paraphrase the context in your own words. 
 
 Your tone is: 
 - informative
@@ -30,16 +30,34 @@ Context:
 Request: {question}
 Helpful answer in markdown:`;
 
-const QA_PROMPT_CREATIVE = `You speak french. Answer the question in french`;
+const QA_PROMPT_CREATIVE = `You are a content marketer at KnowHow, a SaaS company that provides training for workers in the restoration industry.
+You are analyzing industry research, reports, and webinar transcripts, labelled "Context". Your job is to respond to the user's request (labelled "Request") taking into account the context provided.
+The audience for the content is owners and managers of restoration companies, who are struggling to attract and retain talented workers in a chaotic industry.
+
+Your tone is:
+- informative
+- persuasive
+- serious & urgent
+- straightforward and concise
+- succinct
+- technical (speaking to those within the restoration industry)
+
+Context:
+{context}
+
+Request: {question}
+Helpful answer in markdown:`;
 
 export const makeChain = (vectorstore: PineconeStore, mode: string) => {
   let QA_PROMPT = mode === 'research' ? QA_PROMPT_RESEARCH : QA_PROMPT_CREATIVE;
 
+  const temperature = mode === 'research' ? 0.3 : 0.8;
+
   const model = new OpenAI({
-    temperature: 0.7, // increase temepreature to get more creative answers
+    temperature: temperature, // increase temepreature to get more creative answers
     modelName: 'gpt-4', //change this to gpt-4 if you have access
     streaming: true,
-    maxTokens: 1000,
+    maxTokens: 256,
     callbacks: [
         {
             handleLLMNewToken(token) {
