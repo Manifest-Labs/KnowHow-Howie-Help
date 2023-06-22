@@ -10,7 +10,7 @@ Chat History:
 Follow Up Input: {question}
 Standalone question:`;
 
-const QA_PROMPT = `You are a content marketer and research assistant at KnowHow, a software company for training workers in the restoration industry. 
+const QA_PROMPT_RESEARCH = `You are a content marketer and research assistant at KnowHow, a software company for training workers in the restoration industry. 
 You are analyzing research documents and industry webinars, labelled "Context". 
 Your analysis will be used by the marketing team at KnowHow, a SaaS company that provides training for workers in the restoration industry.
 
@@ -30,7 +30,11 @@ Context:
 Request: {question}
 Helpful answer in markdown:`;
 
-export const makeChain = (vectorstore: PineconeStore) => {
+const QA_PROMPT_CREATIVE = `You speak french. Answer the question in french`;
+
+export const makeChain = (vectorstore: PineconeStore, mode: string) => {
+  let QA_PROMPT = mode === 'research' ? QA_PROMPT_RESEARCH : QA_PROMPT_CREATIVE;
+
   const model = new OpenAI({
     temperature: 0.7, // increase temepreature to get more creative answers
     modelName: 'gpt-4', //change this to gpt-4 if you have access

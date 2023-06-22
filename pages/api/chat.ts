@@ -9,7 +9,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { question, history } = req.body;
+  const { question, history, mode } = req.body;
 
   console.log('question', question);
 
@@ -22,6 +22,12 @@ export default async function handler(
   if (!question) {
     return res.status(400).json({ message: 'No question in the request' });
   }
+  
+  // Validate mode
+  if (!mode || !['research', 'creative'].includes(mode)) {
+    return res.status(400).json({ message: 'Invalid or missing mode in the request' });
+  }
+
   // OpenAI recommends replacing newlines with spaces for best results
   const sanitizedQuestion = question.trim().replaceAll('\n', ' ');
 
@@ -39,7 +45,7 @@ export default async function handler(
     );
 
     //create chain
-    const chain = makeChain(vectorStore);
+    const chain = makeChain(vectorStore, mode);
     //Ask a question using chat history
     const response = await chain.call({
       question: sanitizedQuestion,

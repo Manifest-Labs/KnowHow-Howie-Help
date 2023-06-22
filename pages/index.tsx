@@ -17,6 +17,7 @@ export default function Home() {
   const [query, setQuery] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [mode, setMode] = useState('research');
   const [messageState, setMessageState] = useState<{
     messages: Message[];
     pending?: string;
@@ -85,6 +86,7 @@ export default function Home() {
         body: JSON.stringify({
           question,
           history,
+          mode,
         }),
       });
       const data = await response.json();
@@ -266,6 +268,30 @@ export default function Home() {
                       </svg>
                     )}
                   </button>
+                  <div className="flex items-center space-x-4">
+                    <div>
+                      <input 
+                        type="radio"
+                        id="research-mode"
+                        name="mode"
+                        value="research"
+                        checked={mode === 'research'}
+                        onChange={(e) => setMode(e.target.value)}
+                      />
+                      <label htmlFor="research-mode">Research Mode</label>
+                    </div>
+                    <div>
+                      <input 
+                        type="radio"
+                        id="creative-mode"
+                        name="mode"
+                        value="creative"
+                        checked={mode === 'creative'}
+                        onChange={(e) => setMode(e.target.value)}
+                      />
+                      <label htmlFor="creative-mode">Creative Mode</label>
+                    </div>
+                  </div>
                 </form>
               </div>
             </div>
